@@ -29,7 +29,7 @@ def get_moves() -> Generator[tuple[int, int, int], None, None]:
     for move in moves_text.split("\n"):
         parsed = REGEX.fullmatch(move)
         amount, start, end = [int(x) for x in parsed.group(1, 2, 3)]
-    yield (amount, start, end)
+        yield (amount, start, end)
 
 
 def part_a():

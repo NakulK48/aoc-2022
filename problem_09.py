@@ -10,6 +10,7 @@ def parse_line(line: str):
 input_text = Path("problem_09.txt").read_text().strip()
 input_pairs = [parse_line(line) for line in input_text.split("\n")]
 
+
 @dataclass(frozen=True)
 class Position:
     x: int
@@ -79,7 +80,7 @@ def part_b():
                 raise ValueError(f"Invalid direction {direction}")
             positions[0] = head_pos
             for i in range(1, len(positions)):
-                positions[i] = get_new_tail_pos(positions[i-1], positions[i])
+                positions[i] = get_new_tail_pos(positions[i - 1], positions[i])
             tail_visited.add(positions[-1])
     return len(tail_visited)
 

@@ -60,9 +60,9 @@ def part_b():
         for col_num in range(len(input_grid[0])):
             height = input_grid[row_num][col_num]
             left_heights = input_grid[row_num][:col_num][::-1]
-            right_heights = input_grid[row_num][col_num+1:]
+            right_heights = input_grid[row_num][col_num + 1 :]
             up_heights = [row[col_num] for row in input_grid[:row_num]][::-1]
-            down_heights = [row[col_num] for row in input_grid[row_num+1:]]
+            down_heights = [row[col_num] for row in input_grid[row_num + 1 :]]
             current_score = 1
             for heights in (left_heights, right_heights, up_heights, down_heights):
                 current_score *= count_visible_trees(heights, height)

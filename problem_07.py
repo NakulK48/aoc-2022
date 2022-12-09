@@ -24,7 +24,7 @@ def get_directory_sizes():
                 line_index < len(input_lines) and not
                 (line := input_lines[line_index]).startswith("$")
             ):
-                if not line.startswith("dir"):
+                if not line.startswith("dir"):  
                     file_size = int(line.split()[0])
                     for folder_index in range(len(folder)):
                         directory_sizes[tuple(folder[:folder_index+1])] += file_size

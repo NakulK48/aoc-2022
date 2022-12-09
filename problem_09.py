@@ -38,22 +38,26 @@ def get_new_tail_pos(head_pos: Position, tail_pos: Position):
     return Position(new_x, new_y)
 
 
+def get_new_head_pos(head_pos: Position, direction: str):
+    if direction == "R":
+        return Position(head_pos.x + 1, head_pos.y)
+    elif direction == "L":
+        return Position(head_pos.x - 1, head_pos.y)
+    elif direction == "U":
+        return Position(head_pos.x, head_pos.y + 1)
+    elif direction == "D":
+        return Position(head_pos.x, head_pos.y - 1)
+    else:
+        raise ValueError(f"Invalid direction {direction}")
+
+
 def part_a():
     tail_visited = set()
     head_pos = Position(0, 0)
     tail_pos = Position(0, 0)
     for (direction, distance) in input_pairs:
         for _ in range(distance):
-            if direction == "R":
-                head_pos = Position(head_pos.x + 1, head_pos.y)
-            elif direction == "L":
-                head_pos = Position(head_pos.x - 1, head_pos.y)
-            elif direction == "U":
-                head_pos = Position(head_pos.x, head_pos.y + 1)
-            elif direction == "D":
-                head_pos = Position(head_pos.x, head_pos.y - 1)
-            else:
-                raise ValueError(f"Invalid direction {direction}")
+            head_pos = get_new_head_pos(head_pos, direction)
             tail_pos = get_new_tail_pos(head_pos, tail_pos)
             tail_visited.add(tail_pos)
     return len(tail_visited)
@@ -67,18 +71,7 @@ def part_b():
     positions = [Position(0, 0) for _ in range(10)]
     for (direction, distance) in input_pairs:
         for _ in range(distance):
-            head_pos = positions[0]
-            if direction == "R":
-                head_pos = Position(head_pos.x + 1, head_pos.y)
-            elif direction == "L":
-                head_pos = Position(head_pos.x - 1, head_pos.y)
-            elif direction == "U":
-                head_pos = Position(head_pos.x, head_pos.y + 1)
-            elif direction == "D":
-                head_pos = Position(head_pos.x, head_pos.y - 1)
-            else:
-                raise ValueError(f"Invalid direction {direction}")
-            positions[0] = head_pos
+            positions[0] = get_new_head_pos(positions[0], direction)
             for i in range(1, len(positions)):
                 positions[i] = get_new_tail_pos(positions[i - 1], positions[i])
             tail_visited.add(positions[-1])
